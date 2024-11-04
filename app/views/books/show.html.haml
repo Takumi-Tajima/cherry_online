@@ -1,5 +1,7 @@
 %h1 ユーザー側の詳細
 
+= button_to 'カートに追加', cart_cart_items_path(book_id: @book.id), class: 'btn btn-primary'
+
 %p
   %b Title:
   = @book.title
