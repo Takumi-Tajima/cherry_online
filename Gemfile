@@ -19,7 +19,6 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
   gem 'haml_lint'
-  gem 'rspec-rails'
 end
 
 group :development do
