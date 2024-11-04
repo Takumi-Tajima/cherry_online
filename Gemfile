@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 7.2.1'
 
 gem 'cssbundling-rails'
+gem 'devise'
 gem 'haml-rails'
 gem 'jsbundling-rails'
 gem 'pg'
