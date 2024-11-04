@@ -45,6 +45,6 @@ class Admins::BooksController < Admins::ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :price, :released_on)
+    params.require(:book).permit(%i[title price released_on])
   end
 end
