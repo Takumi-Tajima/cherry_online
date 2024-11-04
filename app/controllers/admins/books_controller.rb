@@ -19,7 +19,7 @@ class Admins::BooksController < Admins::ApplicationController
     @book = Book.new(book_params)
 
     if @book.save
-      redirect_to @book, notice: 'Book was successfully created.'
+      redirect_to admins_book_path(@book), notice: 'Book was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class Admins::BooksController < Admins::ApplicationController
 
   def update
     if @book.update(book_params)
-      redirect_to @book, notice: 'Book was successfully updated.', status: :see_other
+      redirect_to admins_book_path(@book), notice: 'Book was successfully updated.', status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -35,7 +35,7 @@ class Admins::BooksController < Admins::ApplicationController
 
   def destroy
     @book.destroy!
-    redirect_to books_url, notice: 'Book was successfully destroyed.', status: :see_other
+    redirect_to admins_books_path, notice: 'Book was successfully destroyed.', status: :see_other
   end
 
   private

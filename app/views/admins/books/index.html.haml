@@ -16,10 +16,10 @@
         %td= book.title
         %td= book.price
         %td= book.released_on
-        %td= link_to 'Show', book
-        %td= link_to 'Edit', edit_book_path(book)
-        %td= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Show', admins_book_path(book)
+        %td= link_to 'Edit', edit_admins_book_path(book)
+        %td= button_to '削除', admins_book_path(book), method: :delete
 
 %br
 
-= link_to 'New Book', new_book_path
+= link_to 'New Book', new_admins_book_path
