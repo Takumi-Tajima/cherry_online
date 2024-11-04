@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     resources :books
   end
 
-  resources :books
+  resources :books, only: %i[index show]
+  root 'books#index'
 end
