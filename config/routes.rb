@@ -9,4 +9,8 @@ Rails.application.routes.draw do
 
   resources :books, only: %i[index show]
   root 'books#index'
+
+  resource :cart, only: %i[show] do
+    resources :cart_items, module: :cart, only: %i[create destroy]
+  end
 end
