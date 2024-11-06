@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   end
 
   resources :books, only: %i[index show]
+  resources :orders, only: %i[create]
 end
