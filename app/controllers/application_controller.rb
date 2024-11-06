@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name])
     devise_parameter_sanitizer.permit(:account_update, keys: %i[name])
   end
+
+  def current_cart
+    current_user.cart || current_user.create_cart!
+  end
 end

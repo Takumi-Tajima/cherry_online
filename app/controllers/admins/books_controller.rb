@@ -2,7 +2,7 @@ class Admins::BooksController < Admins::ApplicationController
   before_action :set_book, only: %i[show edit update destroy]
 
   def index
-    @books = Book.all
+    @books = Book.default_order
   end
 
   def show
@@ -45,6 +45,6 @@ class Admins::BooksController < Admins::ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :price, :released_on)
+    params.require(:book).permit(%i[title price released_on])
   end
 end
