@@ -1,0 +1,17 @@
+%h1 注文履歴
+
+%table
+  %thead
+    %tr
+      %th 購入日
+      %th 金額
+      %th 購入数
+      %th
+
+  %tbody
+    - @orders.each do |order|
+      %tr
+        %td= order.purchased_at
+        %td= order.total_price
+        %td= order.order_items.count
+        %td= link_to '詳細', order_path(order)

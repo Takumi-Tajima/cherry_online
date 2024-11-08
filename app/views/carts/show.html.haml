@@ -16,3 +16,5 @@
         %td= cart_item.book.title
         %td= cart_item.book.price
         %td= button_to '削除', cart_cart_item_path(cart_item), method: :delete
+
+= button_to '注文する', orders_path, class: 'btn btn-primary'
