@@ -1,4 +1,4 @@
-class OrdersController < ApplicationController
+class Users::OrdersController < ApplicationController
   def index
     @orders = current_user.orders.default_order
   end
