@@ -1,4 +1,6 @@
 class Cart::CartItemsController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[create destroy]
+
   def create
     book = Book.find(params[:book_id])
     current_cart.cart_items.find_or_create_by!(book:)
