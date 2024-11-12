@@ -12,8 +12,19 @@ class ApplicationController < ActionController::Base
 
   def current_cart
     if user_signed_in?
-      current_user.cart || current_user.create_cart!
-    elsif session[:cart_id]
+      find_or_create_user_cart
+    else
+      find_or_create_guest_cart
+    end
+  end
+
+  def find_or_create_user_cart
+    cart = current_user.cart || current_user.create_cart!
+    cart.merge_guest_cart(session.delete(:cart_id))
+  end
+
+  def find_or_create_guest_cart
+    if session[:cart_id]
       Cart.find(session[:cart_id])
     else
       cart = Cart.create!
