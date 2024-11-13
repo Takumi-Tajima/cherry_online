@@ -13,38 +13,13 @@ class Cart < ApplicationRecord
     end
   end
 
-  def merge_guest_cart(session_cart_id)
-    return unless session_cart_id
+  def merge_guest_cart(cart_id)
+    return unless cart_id
 
-    guest_cart = Cart.find(session_cart_id)
-
-    mergable_books = []
-
-    # ゲストカートの中身を配列として持たせる
+    guest_cart = Cart.find(cart_id)
     guest_cart.cart_items.each do |cart_item|
-      Rails.logger.info '=' * 20
-      Rails.logger.info 'cart_itemsの中身'
-      Rails.logger.info cart_item
-      Rails.logger.info '=' * 20
-
-      mergable_books << cart_item
-
-      Rails.logger.info '=' * 20
-      Rails.logger.info 'mergable_bookの中身'
-      Rails.logger.info mergable_books
-      Rails.logger.info '=' * 20
+      cart_items << cart_item
     end
-
-    cart_items << mergable_books
-    # cart_items.save!
-
-    Rails.logger.info '=' * 20
-    Rails.logger.info 'cart_itmesの中身'
-    Rails.logger.info cart_items
-    Rails.logger.info '=' * 20
-
-    # debugger
-
     guest_cart.destroy!
   end
 

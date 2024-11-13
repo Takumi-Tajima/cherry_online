@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
   def find_or_create_user_cart
     cart = current_user.cart || current_user.create_cart!
     cart.merge_guest_cart(session.delete(:cart_id))
+    cart
   end
 
   def find_or_create_guest_cart
