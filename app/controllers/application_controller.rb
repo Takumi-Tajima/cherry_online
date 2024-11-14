@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
@@ -12,6 +11,26 @@ class ApplicationController < ActionController::Base
   end
 
   def current_cart
-    current_user.cart || current_user.create_cart!
+    if user_signed_in?
+      find_or_create_user_cart
+    else
+      find_or_create_guest_cart
+    end
+  end
+
+  def find_or_create_user_cart
+    cart = current_user.cart || current_user.create_cart!
+    cart.merge_guest_cart(session.delete(:cart_id))
+    cart
+  end
+
+  def find_or_create_guest_cart
+    if session[:cart_id]
+      Cart.find(session[:cart_id])
+    else
+      cart = Cart.create!
+      session[:cart_id] = cart.id
+      cart
+    end
   end
 end
