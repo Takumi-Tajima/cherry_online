@@ -1,6 +1,7 @@
 class Cart < ApplicationRecord
   belongs_to :user, optional: true
   has_many :cart_items, dependent: :destroy
+  has_many :books, through: :cart_items
 
   def order!
     transaction do
@@ -17,19 +18,11 @@ class Cart < ApplicationRecord
     return unless cart_id
 
     guest_cart = Cart.find(cart_id)
-    guest_cart.cart_items.each do |cart_item|
-      cart_items << cart_item
+    transaction do
+      guest_cart.cart_items.each do |cart_item|
+        books << cart_item.book
+      end
+      guest_cart.destroy!
     end
-    guest_cart.destroy!
   end
-
-  # def merge_guest_cart(guest_cart)
-  #   transaction do
-  #     guest_cart.cart_items.each do |cart_item|
-  #       debugger
-  #       cart_items.create!(book: cart_item.book_id)
-  #     end
-  #     guest_cart.destroy!
-  #   end
-  # end
 end
