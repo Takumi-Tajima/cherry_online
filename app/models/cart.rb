@@ -20,9 +20,13 @@ class Cart < ApplicationRecord
     guest_cart = Cart.find(cart_id)
     transaction do
       guest_cart.cart_items.each do |cart_item|
-        books << cart_item.book
+        books << cart_item.book unless added_book?(cart_item.book)
       end
       guest_cart.destroy!
     end
+  end
+
+  def added_book?(book)
+    cart_items.exists?(book_id: book.id)
   end
 end
