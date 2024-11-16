@@ -22,7 +22,6 @@ end
 
 group :development do
   gem 'bullet'
-  gem 'html2haml'
   gem 'rubocop', require: false
   gem 'sgcop', github: 'SonicGarden/sgcop', branch: 'main'
   gem 'web-console'
