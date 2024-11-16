@@ -19,16 +19,13 @@ class Cart < ApplicationRecord
 
     guest_cart = Cart.find(cart_id)
     transaction do
-      guest_cart.cart_items.each do |cart_item|
-        if cart_addable?(cart_item)
-          books << cart_item.book
-        end
-      end
-      guest_cart.destroy!
+      mergeable_books = guest_cart.cart_items.select { |item| addable?(item) }
+      books << mergeable_books
     end
+    guest_cart.destroy!
   end
 
-  def cart_addable?(cart_item)
+  def addable?(cart_item)
     !added_book?(cart_item.book) && !user.has_book?(cart_item.book)
   end
 
