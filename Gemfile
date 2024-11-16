@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 7.2.1'
 
 gem 'cssbundling-rails'
+gem 'devise'
 gem 'haml-rails'
 gem 'jsbundling-rails'
 gem 'pg'
@@ -21,7 +22,6 @@ end
 
 group :development do
   gem 'bullet'
-  gem 'html2haml'
   gem 'rubocop', require: false
   gem 'sgcop', github: 'SonicGarden/sgcop', branch: 'main'
   gem 'web-console'

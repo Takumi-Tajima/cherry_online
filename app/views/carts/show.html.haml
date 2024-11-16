@@ -1,0 +1,20 @@
+%h1 カートの中身だよ
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Price
+      %th Released on
+      %th
+      %th
+      %th
+
+  %tbody
+    - @cart_items.each do |cart_item|
+      %tr
+        %td= cart_item.book.title
+        %td= cart_item.book.price
+        %td= button_to '削除', cart_cart_item_path(cart_item), method: :delete
+
+= button_to '注文する', orders_path, class: 'btn btn-primary'
